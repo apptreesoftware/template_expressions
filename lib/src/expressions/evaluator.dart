@@ -91,9 +91,9 @@ class ExpressionEvaluator {
     dynamic result;
     final ctx = Map<String, dynamic>.from(context);
     _delegate.forEach((key, value) => ctx.putIfAbsent(key, () => value));
-
     if (expression is Literal) {
       result = evalLiteral(expression, ctx);
+
     } else if (expression is Variable) {
       result = evalVariable(expression, ctx);
     } else if (expression is ThisExpression) {
@@ -127,9 +127,6 @@ class ExpressionEvaluator {
           "Unknown expression type '${expression.runtimeType}'");
     }
 
-    _logger.finest(
-      '[eval]: evaluated.... [${expression.toTokenString()}] => [$result]',
-    );
     return result;
   }
 
